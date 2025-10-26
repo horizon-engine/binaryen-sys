@@ -1,0 +1,17 @@
+Cargo.lock
+
+# Output
+target
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test

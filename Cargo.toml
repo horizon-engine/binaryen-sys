@@ -1,0 +1,21 @@
+[package]
+name = "binaryen-sys"
+version = "0.124.0"
+edition = "2024"
+authors = ["Horizon Games <contact@horizon.games>"]
+license = "Apache-2.0"
+repository = "https://github.com/horizon-engine/binaryen-rs"
+homepage = "https://github.com/horizon-engine/binaryen-rs"
+description = "Bindings to the binaryen library"
+categories = ["external-ffi-bindings"]
+exclude = ["binaryen/test/*", "!binaryen/test/lit"]
+
+[build-dependencies]
+cmake = "0.1"
+cc = "1"
+regex = "1"
+heck = "0.5"
+
+[dev-dependencies]
+bindgen = "0.72"
+diff = "0.1"

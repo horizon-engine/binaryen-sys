@@ -1,0 +1,173 @@
+use heck::ToUpperCamelCase;
+use regex::Regex;
+use std::env;
+use std::fs;
+use std::path::{Path, PathBuf};
+
+#[derive(Clone, PartialEq, Debug)]
+struct Pass {
+    id: String,
+    name: String,
+    description: String,
+}
+
+fn read_passes() -> Vec<Pass> {
+    let re = Regex::new(r#"registerPass\(\s*"([^"]+)",\s*("[^"]+"\s*)+,\s*[^)]+\s*\);"#).unwrap();
+
+    let mut passes: Vec<Pass> = vec![];
+
+    let input =
+        std::fs::read_to_string("binaryen/src/passes/pass.cpp").expect("Couldn't open pass.cpp");
+    for caps in re.captures_iter(&input) {
+        let name = caps.get(1).unwrap().as_str();
+        let description = caps.get(2).unwrap().as_str().replace("\"", "");
+
+        passes.push(Pass {
+            id: name.to_upper_camel_case(),
+            name: name.to_string(),
+            description: description.to_string(),
+        });
+    }
+
+    passes
+}
+
+fn gen_passes() {
+    let passes: Vec<Pass> = read_passes();
+
+    let ids: Vec<String> = passes
+        .iter()
+        .map(|pass| {
+            format!(
+                "/// {}\n{}",
+                pass.description.to_string(),
+                pass.id.to_string()
+            )
+        })
+        .collect();
+
+    let fromstrs: Vec<String> = passes
+        .iter()
+        .map(|pass| {
+            format!(
+                r#""{}" => Ok(OptimizationPass::{})"#,
+                pass.name.to_string(),
+                pass.id.to_string()
+            )
+        })
+        .collect();
+
+    let descriptions: Vec<String> = passes
+        .iter()
+        .map(|pass| {
+            format!(
+                r#"OptimizationPass::{} => "{}""#,
+                pass.id.to_string(),
+                pass.description.to_string()
+            )
+        })
+        .collect();
+
+    let output = format!(
+        r#"
+        use std::str::FromStr;
+
+        #[derive(Eq, PartialEq, Debug)]
+        pub enum OptimizationPass {{
+            {ids}
+        }}
+
+        impl OptimizationPass {{
+            pub fn description(&self) -> &'static str {{
+                match self {{
+                    {descriptions}
+                }}
+            }}
+        }}
+
+        impl FromStr for OptimizationPass {{
+            type Err = ();
+            fn from_str(s: &str) -> Result<Self, Self::Err> {{
+                match s {{
+                    {fromstrs},
+                    _ => Err(()),
+                }}
+            }}
+        }}
+
+        #[cfg(test)]
+        mod tests {{
+            use super::*;
+
+            #[test]
+            fn test_from_str() {{
+                assert_eq!(OptimizationPass::{test_id}, OptimizationPass::from_str("{test_name}").expect("from_str expected to work"));
+            }}
+
+            #[test]
+            fn test_description() {{
+                assert_eq!(OptimizationPass::{test_id}.description(), "{test_description}");
+            }}
+        }}
+    "#,
+        ids = ids.join(",\n"),
+        fromstrs = fromstrs.join(",\n"),
+        descriptions = descriptions.join(",\n"),
+        test_id = passes[0].id.to_string(),
+        test_name = passes[0].name.to_string(),
+        test_description = passes[0].description.to_string()
+    );
+
+    let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
+    fs::write(out_path.join("passes.rs"), output).expect("Unable to write passes.rs");
+}
+
+fn main() {
+    if !Path::new("binaryen/.git").exists() {
+        panic!("binaryen submodule not found. Please run `git submodule update --init` first.");
+    }
+
+    gen_passes();
+
+    let dst = cmake::Config::new("binaryen")
+        .define("BUILD_STATIC_LIB", "ON")
+        .define("ENABLE_WERROR", "OFF")
+        .define("BUILD_TESTS", "OFF")
+        .define("BUILD_TOOLS", "OFF")
+        .build();
+
+    println!("cargo:rustc-link-search=native={}/build/lib", dst.display());
+    println!("cargo:rustc-link-lib=static=binaryen");
+
+    // We need to link against C++ std lib
+    if let Some(cpp_stdlib) = get_cpp_stdlib() {
+        println!("cargo:rustc-link-lib={}", cpp_stdlib);
+    }
+
+    let mut cfg = cc::Build::new();
+    if cfg.get_compiler().is_like_msvc() {
+        cfg.flag("/std:c++17");
+        // fixes: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+        // https://github.com/pepyakin/binaryen-rs/runs/8112353194?check_suite_focus=true#step:4:2391
+        cfg.flag("/EHsc");
+    } else {
+        cfg.flag("-std=c++17");
+    }
+}
+
+// See https://github.com/alexcrichton/gcc-rs/blob/88ac58e25/src/lib.rs#L1197
+fn get_cpp_stdlib() -> Option<String> {
+    env::var("TARGET").ok().and_then(|target| {
+        if target.contains("msvc") {
+            None
+        } else if target.contains("darwin") {
+            Some("c++".to_string())
+        } else if target.contains("freebsd") {
+            Some("c++".to_string())
+        } else if target.contains("musl") {
+            Some("static=stdc++".to_string())
+        } else {
+            Some("stdc++".to_string())
+        }
+    })
+}
