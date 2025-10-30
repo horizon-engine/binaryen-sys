@@ -9,16 +9,12 @@
 #[test]
 fn test_bindings_up_to_date() {
     let expected = bindgen::Builder::default()
-        .header("wrapper.h")
+        .header("binaryen/src/binaryen-c.h")
         // See https://github.com/rust-lang-nursery/rust-bindgen/issues/947
         .trust_clang_mangling(false)
         .generate_comments(true)
         // https://github.com/rust-lang-nursery/rust-bindgen/issues/947#issuecomment-327100002
         .layout_tests(false)
-        .allowlist_function("Binaryen.*")
-        .allowlist_type("Binaryen.*")
-        .allowlist_function("translateToFuzz")
-        .allowlist_recursively(false)
         .generate()
         .expect("Unable to generate bindings")
         .to_string();
@@ -39,6 +35,8 @@ fn test_bindings_up_to_date() {
             }
         }
 
-        panic!("differences found, need to regenerate bindings");
+        panic!(
+            "differences found, need to regenerate bindings. Run `BLESS=1 cargo test` to regenerate"
+        );
     }
 }
