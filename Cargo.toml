@@ -1,6 +1,6 @@
 [package]
 name = "binaryen-sys"
-version = "0.124.0"
+version = "0.125.0"
 edition = "2024"
 authors = ["Horizon Games <contact@horizon.games>"]
 license = "Apache-2.0"

@@ -2451,7 +2451,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn BinaryenRefNull(module: BinaryenModuleRef, type_: BinaryenType)
-        -> BinaryenExpressionRef;
+    -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
     pub fn BinaryenRefIsNull(
@@ -3513,7 +3513,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn BinaryenAtomicNotifyGetNotifyCount(expr: BinaryenExpressionRef)
-        -> BinaryenExpressionRef;
+    -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
     pub fn BinaryenAtomicNotifySetNotifyCount(
@@ -3738,7 +3738,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn BinaryenDataDropGetSegment(expr: BinaryenExpressionRef)
-        -> *const ::std::os::raw::c_char;
+    -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
     pub fn BinaryenDataDropSetSegment(
@@ -5569,7 +5569,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn RelooperAddBlock(relooper: RelooperRef, code: BinaryenExpressionRef)
-        -> RelooperBlockRef;
+    -> RelooperBlockRef;
 }
 unsafe extern "C" {
     pub fn RelooperAddBranch(
