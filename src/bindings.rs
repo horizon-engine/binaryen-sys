@@ -103,6 +103,7 @@ pub const SIZE_MAX: i32 = -1;
 pub const WINT_MIN: u32 = 0;
 pub const WINT_MAX: u32 = 4294967295;
 pub type wchar_t = ::std::os::raw::c_int;
+#[doc = " Define 'max_align_t' to match the GCC definition."]
 #[repr(C)]
 #[repr(align(16))]
 #[derive(Debug, Copy, Clone)]
@@ -111,10 +112,12 @@ pub struct max_align_t {
     pub __bindgen_padding_0: u64,
     pub __clang_max_align_nonce2: u128,
 }
+#[doc = " Convenience types."]
 pub type __u_char = ::std::os::raw::c_uchar;
 pub type __u_short = ::std::os::raw::c_ushort;
 pub type __u_int = ::std::os::raw::c_uint;
 pub type __u_long = ::std::os::raw::c_ulong;
+#[doc = " Fixed-size types, underlying types depend on word size and compiler."]
 pub type __int8_t = ::std::os::raw::c_schar;
 pub type __uint8_t = ::std::os::raw::c_uchar;
 pub type __int16_t = ::std::os::raw::c_short;
@@ -123,6 +126,7 @@ pub type __int32_t = ::std::os::raw::c_int;
 pub type __uint32_t = ::std::os::raw::c_uint;
 pub type __int64_t = ::std::os::raw::c_long;
 pub type __uint64_t = ::std::os::raw::c_ulong;
+#[doc = " Smallest types with at least a given width."]
 pub type __int_least8_t = __int8_t;
 pub type __uint_least8_t = __uint8_t;
 pub type __int_least16_t = __int16_t;
@@ -173,30 +177,39 @@ pub type __fsword_t = ::std::os::raw::c_long;
 pub type __ssize_t = ::std::os::raw::c_long;
 pub type __syscall_slong_t = ::std::os::raw::c_long;
 pub type __syscall_ulong_t = ::std::os::raw::c_ulong;
+#[doc = " These few don't really vary by system, they always correspond\nto one of the other defined types."]
 pub type __loff_t = __off64_t;
 pub type __caddr_t = *mut ::std::os::raw::c_char;
 pub type __intptr_t = ::std::os::raw::c_long;
 pub type __socklen_t = ::std::os::raw::c_uint;
+#[doc = " C99: An integer type that can be accessed as an atomic entity,\neven in the presence of asynchronous interrupts.\nIt is not currently necessary for this to be machine-specific."]
 pub type __sig_atomic_t = ::std::os::raw::c_int;
+#[doc = " Signed."]
 pub type int_least8_t = __int_least8_t;
 pub type int_least16_t = __int_least16_t;
 pub type int_least32_t = __int_least32_t;
 pub type int_least64_t = __int_least64_t;
+#[doc = " Unsigned."]
 pub type uint_least8_t = __uint_least8_t;
 pub type uint_least16_t = __uint_least16_t;
 pub type uint_least32_t = __uint_least32_t;
 pub type uint_least64_t = __uint_least64_t;
+#[doc = " Signed."]
 pub type int_fast8_t = ::std::os::raw::c_schar;
 pub type int_fast16_t = ::std::os::raw::c_long;
 pub type int_fast32_t = ::std::os::raw::c_long;
 pub type int_fast64_t = ::std::os::raw::c_long;
+#[doc = " Unsigned."]
 pub type uint_fast8_t = ::std::os::raw::c_uchar;
 pub type uint_fast16_t = ::std::os::raw::c_ulong;
 pub type uint_fast32_t = ::std::os::raw::c_ulong;
 pub type uint_fast64_t = ::std::os::raw::c_ulong;
+#[doc = " Largest integral types."]
 pub type intmax_t = __intmax_t;
 pub type uintmax_t = __uintmax_t;
+#[doc = " BinaryenIndex\n\n Used for internal indexes and list sizes."]
 pub type BinaryenIndex = u32;
+#[doc = " Core types (call to get the value of each; you can cache them, they\n never change)"]
 pub type BinaryenType = usize;
 unsafe extern "C" {
     pub fn BinaryenTypeNone() -> BinaryenType;
@@ -253,6 +266,7 @@ unsafe extern "C" {
     pub fn BinaryenTypeUnreachable() -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Not a real type. Used as the last parameter to BinaryenBlock to let\n the API figure out the type instead of providing one."]
     pub fn BinaryenTypeAuto() -> BinaryenType;
 }
 unsafe extern "C" {
@@ -285,6 +299,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenUndefined() -> BinaryenType;
 }
+#[doc = " Packed types (call to get the value of each; you can cache them)"]
 pub type BinaryenPackedType = u32;
 unsafe extern "C" {
     pub fn BinaryenPackedTypeNotPacked() -> BinaryenPackedType;
@@ -295,6 +310,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenPackedTypeInt16() -> BinaryenPackedType;
 }
+#[doc = " Heap types"]
 pub type BinaryenHeapType = usize;
 unsafe extern "C" {
     pub fn BinaryenHeapTypeExt() -> BinaryenHeapType;
@@ -395,11 +411,13 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenTypeFromHeapType(heapType: BinaryenHeapType, nullable: bool) -> BinaryenType;
 }
+#[doc = " Expression ids (call to get the value of each; you can cache them)"]
 pub type BinaryenExpressionId = u32;
 unsafe extern "C" {
     pub fn BinaryenInvalidId() -> BinaryenExpressionId;
 }
 unsafe extern "C" {
+    #[doc = " Copyright 2020 WebAssembly Community Group participants\n\n Licensed under the Apache License, Version 2.0 (the \"License\");\n you may not use this file except in compliance with the License.\n You may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\n Unless required by applicable law or agreed to in writing, software\n distributed under the License is distributed on an \"AS IS\" BASIS,\n WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n See the License for the specific language governing permissions and\n limitations under the License."]
     pub fn BinaryenNopId() -> BinaryenExpressionId;
 }
 unsafe extern "C" {
@@ -702,6 +720,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenStackSwitchId() -> BinaryenExpressionId;
 }
+#[doc = " External kinds (call to get the value of each; you can cache them)"]
 pub type BinaryenExternalKind = u32;
 unsafe extern "C" {
     pub fn BinaryenExternalFunction() -> BinaryenExternalKind;
@@ -718,6 +737,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenExternalTag() -> BinaryenExternalKind;
 }
+#[doc = " Features. Call to get the value of each; you can cache them. Use bitwise\n operators to combine and test particular features."]
 pub type BinaryenFeatures = u32;
 unsafe extern "C" {
     pub fn BinaryenFeatureMVP() -> BinaryenFeatures;
@@ -793,6 +813,7 @@ unsafe extern "C" {
 pub struct BinaryenModule {
     _unused: [u8; 0],
 }
+#[doc = " Modules\n\n Modules contain lists of functions, imports, exports, function types. The\n Add* methods create them on a module. The module owns them and will free\n their memory when the module is disposed of.\n\n Expressions are also allocated inside modules, and freed with the module.\n They are not created by Add* methods, since they are not added directly on\n the module, instead, they are arguments to other expressions (and then they\n are the children of that AST node), or to a function (and then they are the\n body of that function).\n\n A module can also contain a function table for indirect calls, a memory,\n and a start method."]
 pub type BinaryenModuleRef = *mut BinaryenModule;
 unsafe extern "C" {
     pub fn BinaryenModuleCreate() -> BinaryenModuleRef;
@@ -800,6 +821,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenModuleDispose(module: BinaryenModuleRef);
 }
+#[doc = " Literals. These are passed by value."]
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct BinaryenLiteral {
@@ -837,6 +859,7 @@ unsafe extern "C" {
 unsafe extern "C" {
     pub fn BinaryenLiteralFloat64Bits(x: i64) -> BinaryenLiteral;
 }
+#[doc = " Expressions\n\n Some expressions have a BinaryenOp, which is the more\n specific operation/opcode.\n\n Some expressions have optional parameters, like Return may not\n return a value. You can supply a NULL pointer in those cases.\n\n For more information, see wasm.h"]
 pub type BinaryenOp = i32;
 unsafe extern "C" {
     pub fn BinaryenClzInt32() -> BinaryenOp;
@@ -2081,6 +2104,7 @@ pub struct BinaryenExpression {
 }
 pub type BinaryenExpressionRef = *mut BinaryenExpression;
 unsafe extern "C" {
+    #[doc = " Block: name can be NULL. Specifying BinaryenUndefined() as the 'type'\n        parameter indicates that the block's type shall be figured out\n        automatically instead of explicitly providing it. This conforms\n        to the behavior before the 'type' parameter has been introduced."]
     pub fn BinaryenBlock(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -2090,6 +2114,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " If: ifFalse can be NULL"]
     pub fn BinaryenIf(
         module: BinaryenModuleRef,
         condition: BinaryenExpressionRef,
@@ -2105,6 +2130,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Break: value and condition can be NULL"]
     pub fn BinaryenBreak(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -2113,6 +2139,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Switch: value can be NULL"]
     pub fn BinaryenSwitch(
         module: BinaryenModuleRef,
         names: *mut *const ::std::os::raw::c_char,
@@ -2123,6 +2150,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Call: Note the 'returnType' parameter. You must declare the\n       type returned by the function being called, as that\n       function might not have been created yet, so we don't\n       know what it is."]
     pub fn BinaryenCall(
         module: BinaryenModuleRef,
         target: *const ::std::os::raw::c_char,
@@ -2163,6 +2191,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " LocalGet: Note the 'type' parameter. It might seem redundant, since the\n           local at that index must have a type. However, this API lets you\n           build code \"top-down\": create a node, then its parents, and so\n           on, and finally create the function at the end. (Note that in fact\n           you do not mention a function when creating ExpressionRefs, only\n           a module.) And since LocalGet is a leaf node, we need to be told\n           its type. (Other nodes detect their type either from their\n           type or their opcode, or failing that, their children. But\n           LocalGet has no children, it is where a \"stream\" of type info\n           begins.)\n           Note also that the index of a local can refer to a param or\n           a var, that is, either a parameter to the function or a variable\n           declared when you call BinaryenAddFunction. See BinaryenAddFunction\n           for more details."]
     pub fn BinaryenLocalGet(
         module: BinaryenModuleRef,
         index: BinaryenIndex,
@@ -2199,6 +2228,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Load: align can be 0, in which case it will be the natural alignment (equal\n to bytes)"]
     pub fn BinaryenLoad(
         module: BinaryenModuleRef,
         bytes: u32,
@@ -2211,6 +2241,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Store: align can be 0, in which case it will be the natural alignment (equal\n to bytes)"]
     pub fn BinaryenStore(
         module: BinaryenModuleRef,
         bytes: u32,
@@ -2258,6 +2289,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Return: value can be NULL"]
     pub fn BinaryenReturn(
         module: BinaryenModuleRef,
         value: BinaryenExpressionRef,
@@ -2451,7 +2483,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn BinaryenRefNull(module: BinaryenModuleRef, type_: BinaryenType)
-    -> BinaryenExpressionRef;
+        -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
     pub fn BinaryenRefIsNull(
@@ -2511,6 +2543,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Try: name can be NULL. delegateTarget should be NULL in try-catch."]
     pub fn BinaryenTry(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -2600,6 +2633,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Passing in null for |operands| (and 0 for |numOperands|) implies this is\n struct.new_default."]
     pub fn BinaryenStructNew(
         module: BinaryenModuleRef,
         operands: *mut BinaryenExpressionRef,
@@ -2811,42 +2845,53 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the id (kind) of the given expression."]
     pub fn BinaryenExpressionGetId(expr: BinaryenExpressionRef) -> BinaryenExpressionId;
 }
 unsafe extern "C" {
+    #[doc = " Gets the type of the given expression."]
     pub fn BinaryenExpressionGetType(expr: BinaryenExpressionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the type of the given expression."]
     pub fn BinaryenExpressionSetType(expr: BinaryenExpressionRef, type_: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " Prints text format of the given expression to stdout."]
     pub fn BinaryenExpressionPrint(expr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Re-finalizes an expression after it has been modified."]
     pub fn BinaryenExpressionFinalize(expr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Makes a deep copy of the given expression."]
     pub fn BinaryenExpressionCopy(
         expr: BinaryenExpressionRef,
         module: BinaryenModuleRef,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name (label) of a `block` expression."]
     pub fn BinaryenBlockGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name (label) of a `block` expression."]
     pub fn BinaryenBlockSetName(expr: BinaryenExpressionRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of child expressions of a `block` expression."]
     pub fn BinaryenBlockGetNumChildren(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the child expression at the specified index of a `block` expression."]
     pub fn BinaryenBlockGetChildAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets (replaces) the child expression at the specified index of a `block`\n expression."]
     pub fn BinaryenBlockSetChildAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -2854,12 +2899,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends a child expression to a `block` expression, returning its insertion\n index."]
     pub fn BinaryenBlockAppendChild(
         expr: BinaryenExpressionRef,
         childExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts a child expression at the specified index of a `block` expression,\n moving existing children including the one previously at that index one index\n up."]
     pub fn BinaryenBlockInsertChildAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -2867,69 +2914,89 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the child expression at the specified index of a `block` expression,\n moving all subsequent children one index down. Returns the child expression."]
     pub fn BinaryenBlockRemoveChildAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the condition expression of an `if` expression."]
     pub fn BinaryenIfGetCondition(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the condition expression of an `if` expression."]
     pub fn BinaryenIfSetCondition(expr: BinaryenExpressionRef, condExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the ifTrue (then) expression of an `if` expression."]
     pub fn BinaryenIfGetIfTrue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the ifTrue (then) expression of an `if` expression."]
     pub fn BinaryenIfSetIfTrue(expr: BinaryenExpressionRef, ifTrueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the ifFalse (else) expression, if any, of an `if` expression."]
     pub fn BinaryenIfGetIfFalse(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the ifFalse (else) expression, if any, of an `if` expression."]
     pub fn BinaryenIfSetIfFalse(expr: BinaryenExpressionRef, ifFalseExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name (label) of a `loop` expression."]
     pub fn BinaryenLoopGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name (label) of a `loop` expression."]
     pub fn BinaryenLoopSetName(expr: BinaryenExpressionRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the body expression of a `loop` expression."]
     pub fn BinaryenLoopGetBody(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the body expression of a `loop` expression."]
     pub fn BinaryenLoopSetBody(expr: BinaryenExpressionRef, bodyExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name (target label) of a `br` or `br_if` expression."]
     pub fn BinaryenBreakGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name (target label) of a `br` or `br_if` expression."]
     pub fn BinaryenBreakSetName(expr: BinaryenExpressionRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the condition expression, if any, of a `br_if` expression. No condition\n indicates a `br` expression."]
     pub fn BinaryenBreakGetCondition(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the condition expression, if any, of a `br_if` expression. No condition\n makes it a `br` expression."]
     pub fn BinaryenBreakSetCondition(expr: BinaryenExpressionRef, condExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression, if any, of a `br` or `br_if` expression."]
     pub fn BinaryenBreakGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression, if any, of a `br` or `br_if` expression."]
     pub fn BinaryenBreakSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of names (target labels) of a `br_table` expression."]
     pub fn BinaryenSwitchGetNumNames(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name (target label) at the specified index of a `br_table`\n expression."]
     pub fn BinaryenSwitchGetNameAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name (target label) at the specified index of a `br_table`\n expression."]
     pub fn BinaryenSwitchSetNameAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -2937,12 +3004,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends a name to a `br_table` expression, returning its insertion index."]
     pub fn BinaryenSwitchAppendName(
         expr: BinaryenExpressionRef,
         name: *const ::std::os::raw::c_char,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts a name at the specified index of a `br_table` expression, moving\n existing names including the one previously at that index one index up."]
     pub fn BinaryenSwitchInsertNameAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -2950,53 +3019,65 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the name at the specified index of a `br_table` expression, moving\n all subsequent names one index down. Returns the name."]
     pub fn BinaryenSwitchRemoveNameAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the default name (target label), if any, of a `br_table` expression."]
     pub fn BinaryenSwitchGetDefaultName(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the default name (target label), if any, of a `br_table` expression."]
     pub fn BinaryenSwitchSetDefaultName(
         expr: BinaryenExpressionRef,
         name: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the condition expression of a `br_table` expression."]
     pub fn BinaryenSwitchGetCondition(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the condition expression of a `br_table` expression."]
     pub fn BinaryenSwitchSetCondition(expr: BinaryenExpressionRef, condExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression, if any, of a `br_table` expression."]
     pub fn BinaryenSwitchGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression, if any, of a `br_table` expression."]
     pub fn BinaryenSwitchSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the target function name of a `call` expression."]
     pub fn BinaryenCallGetTarget(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the target function name of a `call` expression."]
     pub fn BinaryenCallSetTarget(
         expr: BinaryenExpressionRef,
         target: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of operands of a `call` expression."]
     pub fn BinaryenCallGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the operand expression at the specified index of a `call` expression."]
     pub fn BinaryenCallGetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operand expression at the specified index of a `call` expression."]
     pub fn BinaryenCallSetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3004,12 +3085,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends an operand expression to a `call` expression, returning its insertion\n index."]
     pub fn BinaryenCallAppendOperand(
         expr: BinaryenExpressionRef,
         operandExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts an operand expression at the specified index of a `call` expression,\n moving existing operands including the one previously at that index one index\n up."]
     pub fn BinaryenCallInsertOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3017,47 +3100,57 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the operand expression at the specified index of a `call` expression,\n moving all subsequent operands one index down. Returns the operand\n expression."]
     pub fn BinaryenCallRemoveOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets whether the specified `call` expression is a tail call."]
     pub fn BinaryenCallIsReturn(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether the specified `call` expression is a tail call."]
     pub fn BinaryenCallSetReturn(expr: BinaryenExpressionRef, isReturn: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets the target expression of a `call_indirect` expression."]
     pub fn BinaryenCallIndirectGetTarget(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the target expression of a `call_indirect` expression."]
     pub fn BinaryenCallIndirectSetTarget(
         expr: BinaryenExpressionRef,
         targetExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the table name of a `call_indirect` expression."]
     pub fn BinaryenCallIndirectGetTable(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the table name of a `call_indirect` expression."]
     pub fn BinaryenCallIndirectSetTable(
         expr: BinaryenExpressionRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of operands of a `call_indirect` expression."]
     pub fn BinaryenCallIndirectGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the operand expression at the specified index of a `call_indirect`\n expression."]
     pub fn BinaryenCallIndirectGetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operand expression at the specified index of a `call_indirect`\n expression."]
     pub fn BinaryenCallIndirectSetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3065,12 +3158,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends an operand expression to a `call_indirect` expression, returning its\n insertion index."]
     pub fn BinaryenCallIndirectAppendOperand(
         expr: BinaryenExpressionRef,
         operandExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts an operand expression at the specified index of a `call_indirect`\n expression, moving existing operands including the one previously at that\n index one index up."]
     pub fn BinaryenCallIndirectInsertOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3078,780 +3173,1011 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the operand expression at the specified index of a `call_indirect`\n expression, moving all subsequent operands one index down. Returns the\n operand expression."]
     pub fn BinaryenCallIndirectRemoveOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets whether the specified `call_indirect` expression is a tail call."]
     pub fn BinaryenCallIndirectIsReturn(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether the specified `call_indirect` expression is a tail call."]
     pub fn BinaryenCallIndirectSetReturn(expr: BinaryenExpressionRef, isReturn: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets the parameter types of the specified `call_indirect` expression."]
     pub fn BinaryenCallIndirectGetParams(expr: BinaryenExpressionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the parameter types of the specified `call_indirect` expression."]
     pub fn BinaryenCallIndirectSetParams(expr: BinaryenExpressionRef, params: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " Gets the result types of the specified `call_indirect` expression."]
     pub fn BinaryenCallIndirectGetResults(expr: BinaryenExpressionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the result types of the specified `call_indirect` expression."]
     pub fn BinaryenCallIndirectSetResults(expr: BinaryenExpressionRef, params: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " Gets the local index of a `local.get` expression."]
     pub fn BinaryenLocalGetGetIndex(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the local index of a `local.get` expression."]
     pub fn BinaryenLocalGetSetIndex(expr: BinaryenExpressionRef, index: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `local.set` tees its value (is a `local.tee`). True if the\n expression has a type other than `none`."]
     pub fn BinaryenLocalSetIsTee(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the local index of a `local.set` or `local.tee` expression."]
     pub fn BinaryenLocalSetGetIndex(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the local index of a `local.set` or `local.tee` expression."]
     pub fn BinaryenLocalSetSetIndex(expr: BinaryenExpressionRef, index: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `local.set` or `local.tee` expression."]
     pub fn BinaryenLocalSetGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `local.set` or `local.tee` expression."]
     pub fn BinaryenLocalSetSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the global being accessed by a `global.get` expression."]
     pub fn BinaryenGlobalGetGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the global being accessed by a `global.get` expression."]
     pub fn BinaryenGlobalGetSetName(
         expr: BinaryenExpressionRef,
         name: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the global being accessed by a `global.set` expression."]
     pub fn BinaryenGlobalSetGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the global being accessed by a `global.set` expression."]
     pub fn BinaryenGlobalSetSetName(
         expr: BinaryenExpressionRef,
         name: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `global.set` expression."]
     pub fn BinaryenGlobalSetGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `global.set` expression."]
     pub fn BinaryenGlobalSetSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the table being accessed by a `table.get` expression."]
     pub fn BinaryenTableGetGetTable(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the table being accessed by a `table.get` expression."]
     pub fn BinaryenTableGetSetTable(
         expr: BinaryenExpressionRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the index expression of a `table.get` expression."]
     pub fn BinaryenTableGetGetIndex(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the index expression of a `table.get` expression."]
     pub fn BinaryenTableGetSetIndex(expr: BinaryenExpressionRef, indexExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the table being accessed by a `table.set` expression."]
     pub fn BinaryenTableSetGetTable(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the table being accessed by a `table.set` expression."]
     pub fn BinaryenTableSetSetTable(
         expr: BinaryenExpressionRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the index expression of a `table.set` expression."]
     pub fn BinaryenTableSetGetIndex(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the index expression of a `table.set` expression."]
     pub fn BinaryenTableSetSetIndex(expr: BinaryenExpressionRef, indexExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `table.set` expression."]
     pub fn BinaryenTableSetGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `table.set` expression."]
     pub fn BinaryenTableSetSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the table being accessed by a `table.size` expression."]
     pub fn BinaryenTableSizeGetTable(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the table being accessed by a `table.size` expression."]
     pub fn BinaryenTableSizeSetTable(
         expr: BinaryenExpressionRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the table being accessed by a `table.grow` expression."]
     pub fn BinaryenTableGrowGetTable(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the table being accessed by a `table.grow` expression."]
     pub fn BinaryenTableGrowSetTable(
         expr: BinaryenExpressionRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `table.grow` expression."]
     pub fn BinaryenTableGrowGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `table.grow` expression."]
     pub fn BinaryenTableGrowSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the delta of a `table.grow` expression."]
     pub fn BinaryenTableGrowGetDelta(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the delta of a `table.grow` expression."]
     pub fn BinaryenTableGrowSetDelta(expr: BinaryenExpressionRef, deltaExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the delta of a `memory.grow` expression."]
     pub fn BinaryenMemoryGrowGetDelta(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the delta of a `memory.grow` expression."]
     pub fn BinaryenMemoryGrowSetDelta(
         expr: BinaryenExpressionRef,
         deltaExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `load` expression is atomic (is an `atomic.load`)."]
     pub fn BinaryenLoadIsAtomic(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether a `load` expression is atomic (is an `atomic.load`)."]
     pub fn BinaryenLoadSetAtomic(expr: BinaryenExpressionRef, isAtomic: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `load` expression operates on a signed value (`_s`)."]
     pub fn BinaryenLoadIsSigned(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether a `load` expression operates on a signed value (`_s`)."]
     pub fn BinaryenLoadSetSigned(expr: BinaryenExpressionRef, isSigned: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of a `load` expression."]
     pub fn BinaryenLoadGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of a `load` expression."]
     pub fn BinaryenLoadSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of bytes loaded by a `load` expression."]
     pub fn BinaryenLoadGetBytes(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the number of bytes loaded by a `load` expression."]
     pub fn BinaryenLoadSetBytes(expr: BinaryenExpressionRef, bytes: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the byte alignment of a `load` expression."]
     pub fn BinaryenLoadGetAlign(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the byte alignment of a `load` expression."]
     pub fn BinaryenLoadSetAlign(expr: BinaryenExpressionRef, align: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of a `load` expression."]
     pub fn BinaryenLoadGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of a `load` expression."]
     pub fn BinaryenLoadSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `store` expression is atomic (is an `atomic.store`)."]
     pub fn BinaryenStoreIsAtomic(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether a `store` expression is atomic (is an `atomic.store`)."]
     pub fn BinaryenStoreSetAtomic(expr: BinaryenExpressionRef, isAtomic: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of bytes stored by a `store` expression."]
     pub fn BinaryenStoreGetBytes(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the number of bytes stored by a `store` expression."]
     pub fn BinaryenStoreSetBytes(expr: BinaryenExpressionRef, bytes: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of a `store` expression."]
     pub fn BinaryenStoreGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of a `store` expression."]
     pub fn BinaryenStoreSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the byte alignment of a `store` expression."]
     pub fn BinaryenStoreGetAlign(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the byte alignment of a `store` expression."]
     pub fn BinaryenStoreSetAlign(expr: BinaryenExpressionRef, align: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of a `store` expression."]
     pub fn BinaryenStoreGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of a `store` expression."]
     pub fn BinaryenStoreSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `store` expression."]
     pub fn BinaryenStoreGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `store` expression."]
     pub fn BinaryenStoreSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value type of a `store` expression."]
     pub fn BinaryenStoreGetValueType(expr: BinaryenExpressionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value type of a `store` expression."]
     pub fn BinaryenStoreSetValueType(expr: BinaryenExpressionRef, valueType: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " Gets the 32-bit integer value of an `i32.const` expression."]
     pub fn BinaryenConstGetValueI32(expr: BinaryenExpressionRef) -> i32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the 32-bit integer value of an `i32.const` expression."]
     pub fn BinaryenConstSetValueI32(expr: BinaryenExpressionRef, value: i32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the 64-bit integer value of an `i64.const` expression."]
     pub fn BinaryenConstGetValueI64(expr: BinaryenExpressionRef) -> i64;
 }
 unsafe extern "C" {
+    #[doc = " Sets the 64-bit integer value of an `i64.const` expression."]
     pub fn BinaryenConstSetValueI64(expr: BinaryenExpressionRef, value: i64);
 }
 unsafe extern "C" {
+    #[doc = " Gets the low 32-bits of the 64-bit integer value of an `i64.const`\n expression."]
     pub fn BinaryenConstGetValueI64Low(expr: BinaryenExpressionRef) -> i32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the low 32-bits of the 64-bit integer value of an `i64.const`\n expression."]
     pub fn BinaryenConstSetValueI64Low(expr: BinaryenExpressionRef, valueLow: i32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the high 32-bits of the 64-bit integer value of an `i64.const`\n expression."]
     pub fn BinaryenConstGetValueI64High(expr: BinaryenExpressionRef) -> i32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the high 32-bits of the 64-bit integer value of an `i64.const`\n expression."]
     pub fn BinaryenConstSetValueI64High(expr: BinaryenExpressionRef, valueHigh: i32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the 32-bit float value of a `f32.const` expression."]
     pub fn BinaryenConstGetValueF32(expr: BinaryenExpressionRef) -> f32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the 32-bit float value of a `f32.const` expression."]
     pub fn BinaryenConstSetValueF32(expr: BinaryenExpressionRef, value: f32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the 64-bit float (double) value of a `f64.const` expression."]
     pub fn BinaryenConstGetValueF64(expr: BinaryenExpressionRef) -> f64;
 }
 unsafe extern "C" {
+    #[doc = " Sets the 64-bit float (double) value of a `f64.const` expression."]
     pub fn BinaryenConstSetValueF64(expr: BinaryenExpressionRef, value: f64);
 }
 unsafe extern "C" {
+    #[doc = " Reads the 128-bit vector value of a `v128.const` expression."]
     pub fn BinaryenConstGetValueV128(expr: BinaryenExpressionRef, out: *mut u8);
 }
 unsafe extern "C" {
+    #[doc = " Sets the 128-bit vector value of a `v128.const` expression."]
     pub fn BinaryenConstSetValueV128(expr: BinaryenExpressionRef, value: *const u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a unary expression."]
     pub fn BinaryenUnaryGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a unary expression."]
     pub fn BinaryenUnarySetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a unary expression."]
     pub fn BinaryenUnaryGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a unary expression."]
     pub fn BinaryenUnarySetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a binary expression."]
     pub fn BinaryenBinaryGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a binary expression."]
     pub fn BinaryenBinarySetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the left expression of a binary expression."]
     pub fn BinaryenBinaryGetLeft(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the left expression of a binary expression."]
     pub fn BinaryenBinarySetLeft(expr: BinaryenExpressionRef, leftExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the right expression of a binary expression."]
     pub fn BinaryenBinaryGetRight(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the right expression of a binary expression."]
     pub fn BinaryenBinarySetRight(expr: BinaryenExpressionRef, rightExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression becoming selected by a `select` expression if the\n condition turns out true."]
     pub fn BinaryenSelectGetIfTrue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression becoming selected by a `select` expression if the\n condition turns out true."]
     pub fn BinaryenSelectSetIfTrue(expr: BinaryenExpressionRef, ifTrueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression becoming selected by a `select` expression if the\n condition turns out false."]
     pub fn BinaryenSelectGetIfFalse(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression becoming selected by a `select` expression if the\n condition turns out false."]
     pub fn BinaryenSelectSetIfFalse(
         expr: BinaryenExpressionRef,
         ifFalseExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the condition expression of a `select` expression."]
     pub fn BinaryenSelectGetCondition(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the condition expression of a `select` expression."]
     pub fn BinaryenSelectSetCondition(expr: BinaryenExpressionRef, condExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression being dropped by a `drop` expression."]
     pub fn BinaryenDropGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression being dropped by a `drop` expression."]
     pub fn BinaryenDropSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression, if any, being returned by a `return` expression."]
     pub fn BinaryenReturnGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression, if any, being returned by a `return` expression."]
     pub fn BinaryenReturnSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of bytes affected by an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWGetBytes(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the number of bytes affected by an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWSetBytes(expr: BinaryenExpressionRef, bytes: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of an atomic read-modify-write expression."]
     pub fn BinaryenAtomicRMWSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of bytes affected by an atomic compare and exchange\n expression."]
     pub fn BinaryenAtomicCmpxchgGetBytes(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the number of bytes affected by an atomic compare and exchange\n expression."]
     pub fn BinaryenAtomicCmpxchgSetBytes(expr: BinaryenExpressionRef, bytes: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression representing the expected value of an atomic compare and\n exchange expression."]
     pub fn BinaryenAtomicCmpxchgGetExpected(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression representing the expected value of an atomic compare and\n exchange expression."]
     pub fn BinaryenAtomicCmpxchgSetExpected(
         expr: BinaryenExpressionRef,
         expectedExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the replacement expression of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgGetReplacement(
         expr: BinaryenExpressionRef,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the replacement expression of an atomic compare and exchange expression."]
     pub fn BinaryenAtomicCmpxchgSetReplacement(
         expr: BinaryenExpressionRef,
         replacementExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression representing the expected value of an\n `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitGetExpected(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression representing the expected value of an\n `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitSetExpected(
         expr: BinaryenExpressionRef,
         expectedExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the timeout expression of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitGetTimeout(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the timeout expression of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitSetTimeout(
         expr: BinaryenExpressionRef,
         timeoutExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the expected type of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitGetExpectedType(expr: BinaryenExpressionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expected type of an `memory.atomic.wait` expression."]
     pub fn BinaryenAtomicWaitSetExpectedType(
         expr: BinaryenExpressionRef,
         expectedType: BinaryenType,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of an `memory.atomic.notify` expression."]
     pub fn BinaryenAtomicNotifyGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of an `memory.atomic.notify` expression."]
     pub fn BinaryenAtomicNotifySetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the notify count expression of an `memory.atomic.notify` expression."]
     pub fn BinaryenAtomicNotifyGetNotifyCount(expr: BinaryenExpressionRef)
-    -> BinaryenExpressionRef;
+        -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the notify count expression of an `memory.atomic.notify` expression."]
     pub fn BinaryenAtomicNotifySetNotifyCount(
         expr: BinaryenExpressionRef,
         notifyCountExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the order of an `atomic.fence` expression."]
     pub fn BinaryenAtomicFenceGetOrder(expr: BinaryenExpressionRef) -> u8;
 }
 unsafe extern "C" {
+    #[doc = " Sets the order of an `atomic.fence` expression."]
     pub fn BinaryenAtomicFenceSetOrder(expr: BinaryenExpressionRef, order: u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD extract expression."]
     pub fn BinaryenSIMDExtractGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD extract expression."]
     pub fn BinaryenSIMDExtractSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the vector expression a SIMD extract expression extracts from."]
     pub fn BinaryenSIMDExtractGetVec(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the vector expression a SIMD extract expression extracts from."]
     pub fn BinaryenSIMDExtractSetVec(expr: BinaryenExpressionRef, vecExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the index of the extracted lane of a SIMD extract expression."]
     pub fn BinaryenSIMDExtractGetIndex(expr: BinaryenExpressionRef) -> u8;
 }
 unsafe extern "C" {
+    #[doc = " Sets the index of the extracted lane of a SIMD extract expression."]
     pub fn BinaryenSIMDExtractSetIndex(expr: BinaryenExpressionRef, index: u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD replace expression."]
     pub fn BinaryenSIMDReplaceGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD replace expression."]
     pub fn BinaryenSIMDReplaceSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the vector expression a SIMD replace expression replaces in."]
     pub fn BinaryenSIMDReplaceGetVec(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the vector expression a SIMD replace expression replaces in."]
     pub fn BinaryenSIMDReplaceSetVec(expr: BinaryenExpressionRef, vecExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the index of the replaced lane of a SIMD replace expression."]
     pub fn BinaryenSIMDReplaceGetIndex(expr: BinaryenExpressionRef) -> u8;
 }
 unsafe extern "C" {
+    #[doc = " Sets the index of the replaced lane of a SIMD replace expression."]
     pub fn BinaryenSIMDReplaceSetIndex(expr: BinaryenExpressionRef, index: u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression a SIMD replace expression replaces with."]
     pub fn BinaryenSIMDReplaceGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression a SIMD replace expression replaces with."]
     pub fn BinaryenSIMDReplaceSetValue(
         expr: BinaryenExpressionRef,
         valueExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the left expression of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleGetLeft(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the left expression of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleSetLeft(expr: BinaryenExpressionRef, leftExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the right expression of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleGetRight(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the right expression of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleSetRight(
         expr: BinaryenExpressionRef,
         rightExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the 128-bit mask of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleGetMask(expr: BinaryenExpressionRef, mask: *mut u8);
 }
 unsafe extern "C" {
+    #[doc = " Sets the 128-bit mask of a SIMD shuffle expression."]
     pub fn BinaryenSIMDShuffleSetMask(expr: BinaryenExpressionRef, mask: *const u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD ternary expression."]
     pub fn BinaryenSIMDTernaryGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD ternary expression."]
     pub fn BinaryenSIMDTernarySetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the first operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernaryGetA(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the first operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernarySetA(expr: BinaryenExpressionRef, aExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the second operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernaryGetB(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the second operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernarySetB(expr: BinaryenExpressionRef, bExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the third operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernaryGetC(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the third operand expression of a SIMD ternary expression."]
     pub fn BinaryenSIMDTernarySetC(expr: BinaryenExpressionRef, cExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD shift expression."]
     pub fn BinaryenSIMDShiftGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD shift expression."]
     pub fn BinaryenSIMDShiftSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression being shifted by a SIMD shift expression."]
     pub fn BinaryenSIMDShiftGetVec(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression being shifted by a SIMD shift expression."]
     pub fn BinaryenSIMDShiftSetVec(expr: BinaryenExpressionRef, vecExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the expression representing the shift of a SIMD shift expression."]
     pub fn BinaryenSIMDShiftGetShift(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the expression representing the shift of a SIMD shift expression."]
     pub fn BinaryenSIMDShiftSetShift(expr: BinaryenExpressionRef, shiftExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD load expression."]
     pub fn BinaryenSIMDLoadGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD load expression."]
     pub fn BinaryenSIMDLoadSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of a SIMD load expression."]
     pub fn BinaryenSIMDLoadGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of a SIMD load expression."]
     pub fn BinaryenSIMDLoadSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the byte alignment of a SIMD load expression."]
     pub fn BinaryenSIMDLoadGetAlign(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the byte alignment of a SIMD load expression."]
     pub fn BinaryenSIMDLoadSetAlign(expr: BinaryenExpressionRef, align: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of a SIMD load expression."]
     pub fn BinaryenSIMDLoadGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of a SIMD load expression."]
     pub fn BinaryenSIMDLoadSetPtr(expr: BinaryenExpressionRef, ptrExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation being performed by a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation being performed by a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the constant offset of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetOffset(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the constant offset of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetOffset(expr: BinaryenExpressionRef, offset: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the byte alignment of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetAlign(expr: BinaryenExpressionRef) -> u32;
 }
 unsafe extern "C" {
+    #[doc = " Sets the byte alignment of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetAlign(expr: BinaryenExpressionRef, align: u32);
 }
 unsafe extern "C" {
+    #[doc = " Gets the lane index of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetIndex(expr: BinaryenExpressionRef) -> u8;
 }
 unsafe extern "C" {
+    #[doc = " Sets the lane index of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetIndex(expr: BinaryenExpressionRef, index: u8);
 }
 unsafe extern "C" {
+    #[doc = " Gets the pointer expression of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetPtr(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the pointer expression of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetPtr(
         expr: BinaryenExpressionRef,
         ptrExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the vector expression of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneGetVec(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the vector expression of a SIMD load/store lane expression."]
     pub fn BinaryenSIMDLoadStoreLaneSetVec(
         expr: BinaryenExpressionRef,
         vecExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a SIMD load/store lane expression performs a store. Otherwise it\n performs a load."]
     pub fn BinaryenSIMDLoadStoreLaneIsStore(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the segment being initialized by a `memory.init`\n expression."]
     pub fn BinaryenMemoryInitGetSegment(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the segment being initialized by a `memory.init`\n expression."]
     pub fn BinaryenMemoryInitSetSegment(
         expr: BinaryenExpressionRef,
         segment: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the destination expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitGetDest(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the destination expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitSetDest(expr: BinaryenExpressionRef, destExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the offset expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitGetOffset(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the offset expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitSetOffset(
         expr: BinaryenExpressionRef,
         offsetExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the size expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitGetSize(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the size expression of a `memory.init` expression."]
     pub fn BinaryenMemoryInitSetSize(expr: BinaryenExpressionRef, sizeExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the segment being dropped by a `data.drop` expression."]
     pub fn BinaryenDataDropGetSegment(expr: BinaryenExpressionRef)
-    -> *const ::std::os::raw::c_char;
+        -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the segment being dropped by a `data.drop` expression."]
     pub fn BinaryenDataDropSetSegment(
         expr: BinaryenExpressionRef,
         segment: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the destination expression of a `memory.copy` expression."]
     pub fn BinaryenMemoryCopyGetDest(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the destination expression of a `memory.copy` expression."]
     pub fn BinaryenMemoryCopySetDest(expr: BinaryenExpressionRef, destExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the source expression of a `memory.copy` expression."]
     pub fn BinaryenMemoryCopyGetSource(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the source expression of a `memory.copy` expression."]
     pub fn BinaryenMemoryCopySetSource(
         expr: BinaryenExpressionRef,
         sourceExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the size expression (number of bytes copied) of a `memory.copy`\n expression."]
     pub fn BinaryenMemoryCopyGetSize(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the size expression (number of bytes copied) of a `memory.copy`\n expression."]
     pub fn BinaryenMemoryCopySetSize(expr: BinaryenExpressionRef, sizeExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the destination expression of a `memory.fill` expression."]
     pub fn BinaryenMemoryFillGetDest(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the destination expression of a `memory.fill` expression."]
     pub fn BinaryenMemoryFillSetDest(expr: BinaryenExpressionRef, destExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `memory.fill` expression."]
     pub fn BinaryenMemoryFillGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `memory.fill` expression."]
     pub fn BinaryenMemoryFillSetValue(
         expr: BinaryenExpressionRef,
         valueExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the size expression (number of bytes filled) of a `memory.fill`\n expression."]
     pub fn BinaryenMemoryFillGetSize(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the size expression (number of bytes filled) of a `memory.fill`\n expression."]
     pub fn BinaryenMemoryFillSetSize(expr: BinaryenExpressionRef, sizeExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " RefIsNull"]
     pub fn BinaryenRefIsNullGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression tested by a `ref.is_null` expression."]
     pub fn BinaryenRefIsNullSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the operation performed by a `ref.as_*` expression."]
     pub fn BinaryenRefAsGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operation performed by a `ref.as_*` expression."]
     pub fn BinaryenRefAsSetOp(expr: BinaryenExpressionRef, op: BinaryenOp);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression tested by a `ref.as_*` expression."]
     pub fn BinaryenRefAsGetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression tested by a `ref.as_*` expression."]
     pub fn BinaryenRefAsSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the function being wrapped by a `ref.func` expression."]
     pub fn BinaryenRefFuncGetFunc(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the function being wrapped by a `ref.func` expression."]
     pub fn BinaryenRefFuncSetFunc(
         expr: BinaryenExpressionRef,
         funcName: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the left expression of a `ref.eq` expression."]
     pub fn BinaryenRefEqGetLeft(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the left expression of a `ref.eq` expression."]
     pub fn BinaryenRefEqSetLeft(expr: BinaryenExpressionRef, left: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the right expression of a `ref.eq` expression."]
     pub fn BinaryenRefEqGetRight(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the right expression of a `ref.eq` expression."]
     pub fn BinaryenRefEqSetRight(expr: BinaryenExpressionRef, right: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name (label) of a `try` expression."]
     pub fn BinaryenTryGetName(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name (label) of a `try` expression."]
     pub fn BinaryenTrySetName(expr: BinaryenExpressionRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the body expression of a `try` expression."]
     pub fn BinaryenTryGetBody(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the body expression of a `try` expression."]
     pub fn BinaryenTrySetBody(expr: BinaryenExpressionRef, bodyExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of catch blocks (= the number of catch tags) of a `try`\n expression."]
     pub fn BinaryenTryGetNumCatchTags(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of catch/catch_all blocks of a `try` expression."]
     pub fn BinaryenTryGetNumCatchBodies(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the catch tag at the specified index of a `try` expression."]
     pub fn BinaryenTryGetCatchTagAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the catch tag at the specified index of a `try` expression."]
     pub fn BinaryenTrySetCatchTagAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3859,12 +4185,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends a catch tag to a `try` expression, returning its insertion index."]
     pub fn BinaryenTryAppendCatchTag(
         expr: BinaryenExpressionRef,
         catchTag: *const ::std::os::raw::c_char,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts a catch tag at the specified index of a `try` expression, moving\n existing catch tags including the one previously at that index one index up."]
     pub fn BinaryenTryInsertCatchTagAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3872,18 +4200,21 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the catch tag at the specified index of a `try` expression, moving\n all subsequent catch tags one index down. Returns the tag."]
     pub fn BinaryenTryRemoveCatchTagAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the catch body expression at the specified index of a `try` expression."]
     pub fn BinaryenTryGetCatchBodyAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the catch body expression at the specified index of a `try` expression."]
     pub fn BinaryenTrySetCatchBodyAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3891,12 +4222,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends a catch expression to a `try` expression, returning its insertion\n index."]
     pub fn BinaryenTryAppendCatchBody(
         expr: BinaryenExpressionRef,
         catchExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts a catch expression at the specified index of a `try` expression,\n moving existing catch bodies including the one previously at that index one\n index up."]
     pub fn BinaryenTryInsertCatchBodyAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3904,44 +4237,54 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the catch expression at the specified index of a `try` expression,\n moving all subsequent catch bodies one index down. Returns the catch\n expression."]
     pub fn BinaryenTryRemoveCatchBodyAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `try` expression has a catch_all clause."]
     pub fn BinaryenTryHasCatchAll(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the target label of a `delegate`."]
     pub fn BinaryenTryGetDelegateTarget(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the target label of a `delegate`."]
     pub fn BinaryenTrySetDelegateTarget(
         expr: BinaryenExpressionRef,
         delegateTarget: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a `try` expression is a try-delegate."]
     pub fn BinaryenTryIsDelegate(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the tag being thrown by a `throw` expression."]
     pub fn BinaryenThrowGetTag(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the tag being thrown by a `throw` expression."]
     pub fn BinaryenThrowSetTag(expr: BinaryenExpressionRef, tagName: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of operands of a `throw` expression."]
     pub fn BinaryenThrowGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the operand at the specified index of a `throw` expression."]
     pub fn BinaryenThrowGetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operand at the specified index of a `throw` expression."]
     pub fn BinaryenThrowSetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3949,12 +4292,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends an operand expression to a `throw` expression, returning its\n insertion index."]
     pub fn BinaryenThrowAppendOperand(
         expr: BinaryenExpressionRef,
         operandExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts an operand expression at the specified index of a `throw` expression,\n moving existing operands including the one previously at that index one index\n up."]
     pub fn BinaryenThrowInsertOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3962,30 +4307,36 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the operand expression at the specified index of a `throw`\n expression, moving all subsequent operands one index down. Returns the\n operand expression."]
     pub fn BinaryenThrowRemoveOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the target catch's corresponding try label of a `rethrow` expression."]
     pub fn BinaryenRethrowGetTarget(expr: BinaryenExpressionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the target catch's corresponding try label of a `rethrow` expression."]
     pub fn BinaryenRethrowSetTarget(
         expr: BinaryenExpressionRef,
         target: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of operands of a `tuple.make` expression."]
     pub fn BinaryenTupleMakeGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the operand at the specified index of a `tuple.make` expression."]
     pub fn BinaryenTupleMakeGetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the operand at the specified index of a `tuple.make` expression."]
     pub fn BinaryenTupleMakeSetOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -3993,12 +4344,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Appends an operand expression to a `tuple.make` expression, returning its\n insertion index."]
     pub fn BinaryenTupleMakeAppendOperand(
         expr: BinaryenExpressionRef,
         operandExpr: BinaryenExpressionRef,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Inserts an operand expression at the specified index of a `tuple.make`\n expression, moving existing operands including the one previously at that\n index one index up."]
     pub fn BinaryenTupleMakeInsertOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
@@ -4006,45 +4359,57 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Removes the operand expression at the specified index of a `tuple.make`\n expression, moving all subsequent operands one index down. Returns the\n operand expression."]
     pub fn BinaryenTupleMakeRemoveOperandAt(
         expr: BinaryenExpressionRef,
         index: BinaryenIndex,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the tuple extracted from of a `tuple.extract` expression."]
     pub fn BinaryenTupleExtractGetTuple(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the tuple extracted from of a `tuple.extract` expression."]
     pub fn BinaryenTupleExtractSetTuple(
         expr: BinaryenExpressionRef,
         tupleExpr: BinaryenExpressionRef,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the index extracted at of a `tuple.extract` expression."]
     pub fn BinaryenTupleExtractGetIndex(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the index extracted at of a `tuple.extract` expression."]
     pub fn BinaryenTupleExtractSetIndex(expr: BinaryenExpressionRef, index: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value expression of a `ref.i31` expression."]
     pub fn BinaryenRefI31GetValue(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value expression of a `ref.i31` expression."]
     pub fn BinaryenRefI31SetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the i31 expression of an `i31.get` expression."]
     pub fn BinaryenI31GetGetI31(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the i31 expression of an `i31.get` expression."]
     pub fn BinaryenI31GetSetI31(expr: BinaryenExpressionRef, i31Expr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether an `i31.get` expression returns a signed value (`_s`)."]
     pub fn BinaryenI31GetIsSigned(expr: BinaryenExpressionRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether an `i31.get` expression returns a signed value (`_s`)."]
     pub fn BinaryenI31GetSetSigned(expr: BinaryenExpressionRef, signed_: bool);
 }
 unsafe extern "C" {
+    #[doc = " CallRef"]
     pub fn BinaryenCallRefGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
@@ -4092,6 +4457,7 @@ unsafe extern "C" {
     pub fn BinaryenCallRefSetReturn(expr: BinaryenExpressionRef, isReturn: bool);
 }
 unsafe extern "C" {
+    #[doc = " RefTest"]
     pub fn BinaryenRefTestGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4104,12 +4470,14 @@ unsafe extern "C" {
     pub fn BinaryenRefTestSetCastType(expr: BinaryenExpressionRef, intendedType: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " RefCast"]
     pub fn BinaryenRefCastGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
     pub fn BinaryenRefCastSetRef(expr: BinaryenExpressionRef, refExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " BrOn"]
     pub fn BinaryenBrOnGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
@@ -4134,6 +4502,7 @@ unsafe extern "C" {
     pub fn BinaryenBrOnSetCastType(expr: BinaryenExpressionRef, castType: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " StructNew"]
     pub fn BinaryenStructNewGetNumOperands(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
@@ -4169,6 +4538,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " StructGet"]
     pub fn BinaryenStructGetGetIndex(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
@@ -4187,6 +4557,7 @@ unsafe extern "C" {
     pub fn BinaryenStructGetSetSigned(expr: BinaryenExpressionRef, signed_: bool);
 }
 unsafe extern "C" {
+    #[doc = " StructSet"]
     pub fn BinaryenStructSetGetIndex(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
@@ -4205,6 +4576,7 @@ unsafe extern "C" {
     pub fn BinaryenStructSetSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayNew"]
     pub fn BinaryenArrayNewGetInit(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4217,6 +4589,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayNewSetSize(expr: BinaryenExpressionRef, sizeExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayNewFixed"]
     pub fn BinaryenArrayNewFixedGetNumValues(expr: BinaryenExpressionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
@@ -4252,6 +4625,7 @@ unsafe extern "C" {
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " ArrayNewData"]
     pub fn BinaryenArrayNewDataGetSegment(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -4278,6 +4652,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayNewDataSetSize(expr: BinaryenExpressionRef, size: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayNewElem"]
     pub fn BinaryenArrayNewElemGetSegment(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -4304,6 +4679,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayNewElemSetSize(expr: BinaryenExpressionRef, size: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayGet"]
     pub fn BinaryenArrayGetGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4322,6 +4698,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayGetSetSigned(expr: BinaryenExpressionRef, signed_: bool);
 }
 unsafe extern "C" {
+    #[doc = " ArraySet"]
     pub fn BinaryenArraySetGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4340,12 +4717,14 @@ unsafe extern "C" {
     pub fn BinaryenArraySetSetValue(expr: BinaryenExpressionRef, valueExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayLen"]
     pub fn BinaryenArrayLenGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
     pub fn BinaryenArrayLenSetRef(expr: BinaryenExpressionRef, refExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayFill"]
     pub fn BinaryenArrayFillGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4370,6 +4749,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayFillSetSize(expr: BinaryenExpressionRef, sizeExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayCopy"]
     pub fn BinaryenArrayCopyGetDestRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4415,6 +4795,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " ArrayInitData"]
     pub fn BinaryenArrayInitDataGetSegment(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -4453,6 +4834,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayInitDataSetSize(expr: BinaryenExpressionRef, size: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " ArrayInitElem"]
     pub fn BinaryenArrayInitElemGetSegment(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -4491,6 +4873,7 @@ unsafe extern "C" {
     pub fn BinaryenArrayInitElemSetSize(expr: BinaryenExpressionRef, size: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " StringNew"]
     pub fn BinaryenStringNewGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
@@ -4515,6 +4898,7 @@ unsafe extern "C" {
     pub fn BinaryenStringNewSetEnd(expr: BinaryenExpressionRef, endExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " StringConst"]
     pub fn BinaryenStringConstGetString(
         expr: BinaryenExpressionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -4526,6 +4910,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " StringMeasure"]
     pub fn BinaryenStringMeasureGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
@@ -4538,6 +4923,7 @@ unsafe extern "C" {
     pub fn BinaryenStringMeasureSetRef(expr: BinaryenExpressionRef, refExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " StringEncode"]
     pub fn BinaryenStringEncodeGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
@@ -4568,6 +4954,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " StringConcat"]
     pub fn BinaryenStringConcatGetLeft(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4586,6 +4973,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " StringEq"]
     pub fn BinaryenStringEqGetOp(expr: BinaryenExpressionRef) -> BinaryenOp;
 }
 unsafe extern "C" {
@@ -4604,6 +4992,7 @@ unsafe extern "C" {
     pub fn BinaryenStringEqSetRight(expr: BinaryenExpressionRef, rightExpr: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " StringWTF16Get"]
     pub fn BinaryenStringWTF16GetGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4622,6 +5011,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " StringSliceWTF"]
     pub fn BinaryenStringSliceWTFGetRef(expr: BinaryenExpressionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
@@ -4653,8 +5043,10 @@ unsafe extern "C" {
 pub struct BinaryenFunction {
     _unused: [u8; 0],
 }
+#[doc = " Functions"]
 pub type BinaryenFunctionRef = *mut BinaryenFunction;
 unsafe extern "C" {
+    #[doc = " Adds a function to the module. This is thread-safe.\n @varTypes: the types of variables. In WebAssembly, vars share\n            an index space with params. In other words, params come from\n            the function type, and vars are provided in this call, and\n            together they are all the locals. The order is first params\n            and then vars, so if you have one param it will be at index\n            0 (and written $0), and if you also have 2 vars they will be\n            at indexes 1 and 2, etc., that is, they share an index space."]
     pub fn BinaryenAddFunction(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -4666,6 +5058,7 @@ unsafe extern "C" {
     ) -> BinaryenFunctionRef;
 }
 unsafe extern "C" {
+    #[doc = " As BinaryenAddFunction, but takes a HeapType rather than params and results.\n This lets you set the specific type of the function."]
     pub fn BinaryenAddFunctionWithHeapType(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -4676,24 +5069,29 @@ unsafe extern "C" {
     ) -> BinaryenFunctionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets a function reference by name. Returns NULL if the function does not\n exist."]
     pub fn BinaryenGetFunction(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
     ) -> BinaryenFunctionRef;
 }
 unsafe extern "C" {
+    #[doc = " Removes a function by name."]
     pub fn BinaryenRemoveFunction(module: BinaryenModuleRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of functions in the module."]
     pub fn BinaryenGetNumFunctions(module: BinaryenModuleRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the function at the specified index."]
     pub fn BinaryenGetFunctionByIndex(
         module: BinaryenModuleRef,
         index: BinaryenIndex,
     ) -> BinaryenFunctionRef;
 }
 unsafe extern "C" {
+    #[doc = " These either create a new entity (function/table/memory/etc.) and\n mark it as an import, or, if an entity already exists with internalName then\n the existing entity is turned into an import."]
     pub fn BinaryenAddFunctionImport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4745,12 +5143,14 @@ unsafe extern "C" {
 pub struct BinaryenMemory {
     _unused: [u8; 0],
 }
+#[doc = " Memory"]
 pub type BinaryenMemoryRef = *mut BinaryenMemory;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct BinaryenExport {
     _unused: [u8; 0],
 }
+#[doc = " Exports"]
 pub type BinaryenExportRef = *mut BinaryenExport;
 unsafe extern "C" {
     pub fn BinaryenAddExport(
@@ -4760,6 +5160,7 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Adds a function export to the module."]
     pub fn BinaryenAddFunctionExport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4767,6 +5168,7 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Adds a table export to the module."]
     pub fn BinaryenAddTableExport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4774,6 +5176,7 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Adds a memory export to the module."]
     pub fn BinaryenAddMemoryExport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4781,6 +5184,7 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Adds a global export to the module."]
     pub fn BinaryenAddGlobalExport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4788,6 +5192,7 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Adds a tag export to the module."]
     pub fn BinaryenAddTagExport(
         module: BinaryenModuleRef,
         internalName: *const ::std::os::raw::c_char,
@@ -4795,21 +5200,25 @@ unsafe extern "C" {
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets an export reference by external name. Returns NULL if the export does\n not exist."]
     pub fn BinaryenGetExport(
         module: BinaryenModuleRef,
         externalName: *const ::std::os::raw::c_char,
     ) -> BinaryenExportRef;
 }
 unsafe extern "C" {
+    #[doc = " Removes an export by external name."]
     pub fn BinaryenRemoveExport(
         module: BinaryenModuleRef,
         externalName: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of exports in the module."]
     pub fn BinaryenGetNumExports(module: BinaryenModuleRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the export at the specified index."]
     pub fn BinaryenGetExportByIndex(
         module: BinaryenModuleRef,
         index: BinaryenIndex,
@@ -4820,8 +5229,10 @@ unsafe extern "C" {
 pub struct BinaryenGlobal {
     _unused: [u8; 0],
 }
+#[doc = " Globals"]
 pub type BinaryenGlobalRef = *mut BinaryenGlobal;
 unsafe extern "C" {
+    #[doc = " Adds a global to the module."]
     pub fn BinaryenAddGlobal(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -4831,18 +5242,22 @@ unsafe extern "C" {
     ) -> BinaryenGlobalRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets a global reference by name. Returns NULL if the global does not exist."]
     pub fn BinaryenGetGlobal(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
     ) -> BinaryenGlobalRef;
 }
 unsafe extern "C" {
+    #[doc = " Removes a global by name."]
     pub fn BinaryenRemoveGlobal(module: BinaryenModuleRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of globals in the module."]
     pub fn BinaryenGetNumGlobals(module: BinaryenModuleRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the global at the specified index."]
     pub fn BinaryenGetGlobalByIndex(
         module: BinaryenModuleRef,
         index: BinaryenIndex,
@@ -4853,8 +5268,10 @@ unsafe extern "C" {
 pub struct BinaryenTag {
     _unused: [u8; 0],
 }
+#[doc = " Tags"]
 pub type BinaryenTagRef = *mut BinaryenTag;
 unsafe extern "C" {
+    #[doc = " Adds a tag to the module."]
     pub fn BinaryenAddTag(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -4863,12 +5280,14 @@ unsafe extern "C" {
     ) -> BinaryenTagRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets a tag reference by name. Returns NULL if the tag does not exist."]
     pub fn BinaryenGetTag(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
     ) -> BinaryenTagRef;
 }
 unsafe extern "C" {
+    #[doc = " Removes a tag by name."]
     pub fn BinaryenRemoveTag(module: BinaryenModuleRef, name: *const ::std::os::raw::c_char);
 }
 #[repr(C)]
@@ -4876,6 +5295,7 @@ unsafe extern "C" {
 pub struct BinaryenTable {
     _unused: [u8; 0],
 }
+#[doc = " Tables"]
 pub type BinaryenTableRef = *mut BinaryenTable;
 unsafe extern "C" {
     pub fn BinaryenAddTable(
@@ -4909,6 +5329,7 @@ unsafe extern "C" {
 pub struct BinaryenElementSegment {
     _unused: [u8; 0],
 }
+#[doc = " Elem segments"]
 pub type BinaryenElementSegmentRef = *mut BinaryenElementSegment;
 unsafe extern "C" {
     pub fn BinaryenAddActiveElementSegment(
@@ -4950,6 +5371,7 @@ unsafe extern "C" {
     ) -> BinaryenElementSegmentRef;
 }
 unsafe extern "C" {
+    #[doc = " This will create a memory, overwriting any existing memory\n Each memory segment has a name in segmentNames, data in segmentDatas,\n a start offset in segmentOffsets, a passive flag in segmentPassives\n and a size in segmentSizes. segmentNames and exportName can be NULL\n If segmentNames is null, BinaryenSetMemory creates names from indices"]
     pub fn BinaryenSetMemory(
         module: BinaryenModuleRef,
         initial: BinaryenIndex,
@@ -5012,6 +5434,7 @@ unsafe extern "C" {
     ) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Memory segments. Query utilities."]
     pub fn BinaryenGetNumMemorySegments(module: BinaryenModuleRef) -> u32;
 }
 unsafe extern "C" {
@@ -5051,152 +5474,198 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Start function. One per module"]
     pub fn BinaryenSetStart(module: BinaryenModuleRef, start: BinaryenFunctionRef);
 }
 unsafe extern "C" {
     pub fn BinaryenGetStart(module: BinaryenModuleRef) -> BinaryenFunctionRef;
 }
 unsafe extern "C" {
+    #[doc = " These control what features are allowed when validation and in passes."]
     pub fn BinaryenModuleGetFeatures(module: BinaryenModuleRef) -> BinaryenFeatures;
 }
 unsafe extern "C" {
     pub fn BinaryenModuleSetFeatures(module: BinaryenModuleRef, features: BinaryenFeatures);
 }
 unsafe extern "C" {
+    #[doc = " Parse a module in s-expression text format"]
     pub fn BinaryenModuleParse(text: *const ::std::os::raw::c_char) -> BinaryenModuleRef;
 }
 unsafe extern "C" {
+    #[doc = " Print a module to stdout in s-expression text format. Useful for debugging."]
     pub fn BinaryenModulePrint(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Print a module to stdout in stack IR text format. Useful for debugging."]
     pub fn BinaryenModulePrintStackIR(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Print a module to stdout in asm.js syntax."]
     pub fn BinaryenModulePrintAsmjs(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Validate a module, showing errors on problems.\n  @return 0 if an error occurred, 1 if validated succesfully"]
     pub fn BinaryenModuleValidate(module: BinaryenModuleRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Runs the standard optimization passes on the module. Uses the currently set\n global optimize and shrink level."]
     pub fn BinaryenModuleOptimize(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Updates the internal name mapping logic in a module. This must be called\n after renaming module elements."]
     pub fn BinaryenModuleUpdateMaps(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the currently set optimize level. Applies to all modules, globally.\n 0, 1, 2 correspond to -O0, -O1, -O2 (default), etc."]
     pub fn BinaryenGetOptimizeLevel() -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Sets the optimization level to use. Applies to all modules, globally.\n 0, 1, 2 correspond to -O0, -O1, -O2 (default), etc."]
     pub fn BinaryenSetOptimizeLevel(level: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
+    #[doc = " Gets the currently set shrink level. Applies to all modules, globally.\n 0, 1, 2 correspond to -O0, -Os (default), -Oz."]
     pub fn BinaryenGetShrinkLevel() -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
+    #[doc = " Sets the shrink level to use. Applies to all modules, globally.\n 0, 1, 2 correspond to -O0, -Os (default), -Oz."]
     pub fn BinaryenSetShrinkLevel(level: ::std::os::raw::c_int);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether generating debug information is currently enabled or not.\n Applies to all modules, globally."]
     pub fn BinaryenGetDebugInfo() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables debug information in emitted binaries.\n Applies to all modules, globally."]
     pub fn BinaryenSetDebugInfo(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether no traps can be considered reached at runtime when optimizing.\n Applies to all modules, globally."]
     pub fn BinaryenGetTrapsNeverHappen() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables whether no traps can be considered reached at\n runtime when optimizing. Applies to all modules, globally."]
     pub fn BinaryenSetTrapsNeverHappen(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether considering that the code outside of the module does\n not inspect or interact with GC and function references. Applies to\n all modules, globally."]
     pub fn BinaryenGetClosedWorld() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables whether considering that the code outside of\n the module does not inspect or interact with GC and function\n references. Applies to all modules, globally."]
     pub fn BinaryenSetClosedWorld(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether the low 1K of memory can be considered unused when optimizing.\n Applies to all modules, globally."]
     pub fn BinaryenGetLowMemoryUnused() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables whether the low 1K of memory can be considered unused\n when optimizing. Applies to all modules, globally."]
     pub fn BinaryenSetLowMemoryUnused(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether to assume that an imported memory is zero-initialized."]
     pub fn BinaryenGetZeroFilledMemory() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables whether to assume that an imported memory is\n zero-initialized."]
     pub fn BinaryenSetZeroFilledMemory(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether fast math optimizations are enabled, ignoring for example\n corner cases of floating-point math like NaN changes.\n Applies to all modules, globally."]
     pub fn BinaryenGetFastMath() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enables or disables fast math optimizations, ignoring for example\n corner cases of floating-point math like NaN changes.\n Applies to all modules, globally."]
     pub fn BinaryenSetFastMath(value: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether to generate StackIR during binary writing.\n Applies to all modules, globally."]
     pub fn BinaryenGetGenerateStackIR() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enable or disable StackIR generation during binary writing.\n Applies to all modules, globally."]
     pub fn BinaryenSetGenerateStackIR(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether to optimize StackIR during binary writing.\n Applies to all modules, globally."]
     pub fn BinaryenGetOptimizeStackIR() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Enable or disable StackIR optimization during binary writing.\n Applies to all modules, globally."]
     pub fn BinaryenSetOptimizeStackIR(on: bool);
 }
 unsafe extern "C" {
+    #[doc = " Gets the value of the specified arbitrary pass argument.\n Applies to all modules, globally."]
     pub fn BinaryenGetPassArgument(
         name: *const ::std::os::raw::c_char,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the value of the specified arbitrary pass argument. Removes the\n respective argument if `value` is NULL. Applies to all modules, globally."]
     pub fn BinaryenSetPassArgument(
         name: *const ::std::os::raw::c_char,
         value: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Clears all arbitrary pass arguments.\n Applies to all modules, globally."]
     pub fn BinaryenClearPassArguments();
 }
 unsafe extern "C" {
+    #[doc = " Gets whether a pass is in the set of passes to skip.\n Applies to all modules, globally."]
     pub fn BinaryenHasPassToSkip(pass: *const ::std::os::raw::c_char) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Add a pass to the set of passes to skip.\n Applies to all modules, globally."]
     pub fn BinaryenAddPassToSkip(pass: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Clears the set of passes to skip.\n Applies to all modules, globally."]
     pub fn BinaryenClearPassesToSkip();
 }
 unsafe extern "C" {
+    #[doc = " Gets the function size at which we always inline.\n Applies to all modules, globally."]
     pub fn BinaryenGetAlwaysInlineMaxSize() -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the function size at which we always inline.\n Applies to all modules, globally."]
     pub fn BinaryenSetAlwaysInlineMaxSize(size: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the function size which we inline when functions are lightweight.\n Applies to all modules, globally."]
     pub fn BinaryenGetFlexibleInlineMaxSize() -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the function size which we inline when functions are lightweight.\n Applies to all modules, globally."]
     pub fn BinaryenSetFlexibleInlineMaxSize(size: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the limit for the combined size of the code after inlining.\n Applies to all modules, globally."]
     pub fn BinaryenGetMaxCombinedBinarySize() -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the limit for the combined size of the code after inlining.\n Applies to all modules, globally."]
     pub fn BinaryenSetMaxCombinedBinarySize(size: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the function size which we inline when there is only one caller.\n Applies to all modules, globally."]
     pub fn BinaryenGetOneCallerInlineMaxSize() -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the function size which we inline when there is only one caller.\n Applies to all modules, globally."]
     pub fn BinaryenSetOneCallerInlineMaxSize(size: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets whether functions with loops are allowed to be inlined.\n Applies to all modules, globally."]
     pub fn BinaryenGetAllowInliningFunctionsWithLoops() -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets whether functions with loops are allowed to be inlined.\n Applies to all modules, globally."]
     pub fn BinaryenSetAllowInliningFunctionsWithLoops(enabled: bool);
 }
 unsafe extern "C" {
+    #[doc = " Runs the specified passes on the module. Uses the currently set global\n optimize and shrink level."]
     pub fn BinaryenModuleRunPasses(
         module: BinaryenModuleRef,
         passes: *mut *const ::std::os::raw::c_char,
@@ -5204,6 +5673,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module into binary form. Uses the currently set global debugInfo\n option.\n @return how many bytes were written. This will be less than or equal to\n         outputSize"]
     pub fn BinaryenModuleWrite(
         module: BinaryenModuleRef,
         output: *mut ::std::os::raw::c_char,
@@ -5211,6 +5681,7 @@ unsafe extern "C" {
     ) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module in s-expression text format.\n @return how many bytes were written. This will be less than or equal to\n         outputSize"]
     pub fn BinaryenModuleWriteText(
         module: BinaryenModuleRef,
         output: *mut ::std::os::raw::c_char,
@@ -5218,6 +5689,7 @@ unsafe extern "C" {
     ) -> usize;
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module in stack IR text format.\n @return how many bytes were written. This will be less than or equal to\n         outputSize"]
     pub fn BinaryenModuleWriteStackIR(
         module: BinaryenModuleRef,
         output: *mut ::std::os::raw::c_char,
@@ -5231,6 +5703,7 @@ pub struct BinaryenBufferSizes {
     pub sourceMapBytes: usize,
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module into binary form including its source map. Uses the\n currently set global debugInfo option.\n @returns how many bytes were written. This will be less than or equal to\n          outputSize"]
     pub fn BinaryenModuleWriteWithSourceMap(
         module: BinaryenModuleRef,
         url: *const ::std::os::raw::c_char,
@@ -5240,6 +5713,7 @@ unsafe extern "C" {
         sourceMapSize: usize,
     ) -> BinaryenBufferSizes;
 }
+#[doc = " Result structure of BinaryenModuleAllocateAndWrite. Contained buffers have\n been allocated using malloc() and the user is expected to free() them\n manually once not needed anymore."]
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct BinaryenModuleAllocateAndWriteResult {
@@ -5248,28 +5722,33 @@ pub struct BinaryenModuleAllocateAndWriteResult {
     pub sourceMap: *mut ::std::os::raw::c_char,
 }
 unsafe extern "C" {
+    #[doc = " Serializes a module into binary form, optionally including its source map if\n sourceMapUrl has been specified. Uses the currently set global debugInfo\n option. Differs from BinaryenModuleWrite in that it implicitly allocates\n appropriate buffers using malloc(), and expects the user to free() them\n manually once not needed anymore."]
     pub fn BinaryenModuleAllocateAndWrite(
         module: BinaryenModuleRef,
         sourceMapUrl: *const ::std::os::raw::c_char,
     ) -> BinaryenModuleAllocateAndWriteResult;
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module in s-expression form. Implicity allocates the returned\n char* with malloc(), and expects the user to free() them manually\n once not needed anymore."]
     pub fn BinaryenModuleAllocateAndWriteText(
         module: BinaryenModuleRef,
     ) -> *mut ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Serialize a module in stack IR form. Implicitly allocates the returned\n char* with malloc(), and expects the user to free() them manually\n once not needed anymore."]
     pub fn BinaryenModuleAllocateAndWriteStackIR(
         module: BinaryenModuleRef,
     ) -> *mut ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Deserialize a module from binary form, assuming the MVP feature set."]
     pub fn BinaryenModuleRead(
         input: *mut ::std::os::raw::c_char,
         inputSize: usize,
     ) -> BinaryenModuleRef;
 }
 unsafe extern "C" {
+    #[doc = " Deserialize a module from binary form, enabling the given feature set."]
     pub fn BinaryenModuleReadWithFeatures(
         input: *mut ::std::os::raw::c_char,
         inputSize: usize,
@@ -5277,51 +5756,64 @@ unsafe extern "C" {
     ) -> BinaryenModuleRef;
 }
 unsafe extern "C" {
+    #[doc = " Execute a module in the Binaryen interpreter. This will create an instance of\n the module, run it in the interpreter - which means running the start method\n - and then destroying the instance."]
     pub fn BinaryenModuleInterpret(module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Adds a debug info file name to the module and returns its index."]
     pub fn BinaryenModuleAddDebugInfoFileName(
         module: BinaryenModuleRef,
         filename: *const ::std::os::raw::c_char,
     ) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the debug info file at the specified index. Returns `NULL`\n if it does not exist."]
     pub fn BinaryenModuleGetDebugInfoFileName(
         module: BinaryenModuleRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the specified `Function`."]
     pub fn BinaryenFunctionGetName(func: BinaryenFunctionRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the type of the parameter at the specified index of the specified\n `Function`."]
     pub fn BinaryenFunctionGetParams(func: BinaryenFunctionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Gets the result type of the specified `Function`."]
     pub fn BinaryenFunctionGetResults(func: BinaryenFunctionRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of additional locals within the specified `Function`."]
     pub fn BinaryenFunctionGetNumVars(func: BinaryenFunctionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the type of the additional local at the specified index within the\n specified `Function`."]
     pub fn BinaryenFunctionGetVar(func: BinaryenFunctionRef, index: BinaryenIndex) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Appends a local variable to the specified `Function`, returning its\n index."]
     pub fn BinaryenFunctionAddVar(func: BinaryenFunctionRef, type_: BinaryenType) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the number of locals within the specified function. Includes parameters."]
     pub fn BinaryenFunctionGetNumLocals(func: BinaryenFunctionRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Tests if the local at the specified index has a name."]
     pub fn BinaryenFunctionHasLocalName(func: BinaryenFunctionRef, index: BinaryenIndex) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the local at the specified index."]
     pub fn BinaryenFunctionGetLocalName(
         func: BinaryenFunctionRef,
         index: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the local at the specified index."]
     pub fn BinaryenFunctionSetLocalName(
         func: BinaryenFunctionRef,
         index: BinaryenIndex,
@@ -5329,21 +5821,27 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the body of the specified `Function`."]
     pub fn BinaryenFunctionGetBody(func: BinaryenFunctionRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets the body of the specified `Function`."]
     pub fn BinaryenFunctionSetBody(func: BinaryenFunctionRef, body: BinaryenExpressionRef);
 }
 unsafe extern "C" {
+    #[doc = " Gets the type of the specified `Function`."]
     pub fn BinaryenFunctionGetType(func: BinaryenFunctionRef) -> BinaryenHeapType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the type of the specified `Function`."]
     pub fn BinaryenFunctionSetType(func: BinaryenFunctionRef, type_: BinaryenHeapType);
 }
 unsafe extern "C" {
+    #[doc = " Runs the standard optimization passes on the function. Uses the currently set\n global optimize and shrink level."]
     pub fn BinaryenFunctionOptimize(func: BinaryenFunctionRef, module: BinaryenModuleRef);
 }
 unsafe extern "C" {
+    #[doc = " Runs the specified passes on the function. Uses the currently set global\n optimize and shrink level."]
     pub fn BinaryenFunctionRunPasses(
         func: BinaryenFunctionRef,
         module: BinaryenModuleRef,
@@ -5352,6 +5850,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Sets the debug location of the specified `Expression` within the specified\n `Function`."]
     pub fn BinaryenFunctionSetDebugLocation(
         func: BinaryenFunctionRef,
         expr: BinaryenExpressionRef,
@@ -5361,93 +5860,118 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the specified `Table`."]
     pub fn BinaryenTableGetName(table: BinaryenTableRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the specified `Table`."]
     pub fn BinaryenTableSetName(table: BinaryenTableRef, name: *const ::std::os::raw::c_char);
 }
 unsafe extern "C" {
+    #[doc = " Gets the initial number of pages of the specified `Table`."]
     pub fn BinaryenTableGetInitial(table: BinaryenTableRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the initial number of pages of the specified `Table`."]
     pub fn BinaryenTableSetInitial(table: BinaryenTableRef, initial: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Tests whether the specified `Table` has a maximum number of pages."]
     pub fn BinaryenTableHasMax(table: BinaryenTableRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the maximum number of pages of the specified `Table`."]
     pub fn BinaryenTableGetMax(table: BinaryenTableRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the maximum number of pages of the specified `Table`."]
     pub fn BinaryenTableSetMax(table: BinaryenTableRef, max: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the table type of the specified `Table`."]
     pub fn BinaryenTableGetType(table: BinaryenTableRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the table type of the specified `Table`."]
     pub fn BinaryenTableSetType(table: BinaryenTableRef, tableType: BinaryenType);
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the specified `ElementSegment`."]
     pub fn BinaryenElementSegmentGetName(
         elem: BinaryenElementSegmentRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the name of the specified `ElementSegment`."]
     pub fn BinaryenElementSegmentSetName(
         elem: BinaryenElementSegmentRef,
         name: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the table name of the specified `ElementSegment`."]
     pub fn BinaryenElementSegmentGetTable(
         elem: BinaryenElementSegmentRef,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Sets the table name of the specified `ElementSegment`."]
     pub fn BinaryenElementSegmentSetTable(
         elem: BinaryenElementSegmentRef,
         table: *const ::std::os::raw::c_char,
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the segment offset in case of active segments"]
     pub fn BinaryenElementSegmentGetOffset(
         elem: BinaryenElementSegmentRef,
     ) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the length of items in the segment"]
     pub fn BinaryenElementSegmentGetLength(elem: BinaryenElementSegmentRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Gets the item at the specified index"]
     pub fn BinaryenElementSegmentGetData(
         elem: BinaryenElementSegmentRef,
         dataId: BinaryenIndex,
     ) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Returns true if the specified elem segment is passive"]
     pub fn BinaryenElementSegmentIsPassive(elem: BinaryenElementSegmentRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the specified `Global`."]
     pub fn BinaryenGlobalGetName(global: BinaryenGlobalRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the `GlobalType` associated with the specified `Global`. May\n be `NULL` if the signature is implicit."]
     pub fn BinaryenGlobalGetType(global: BinaryenGlobalRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Returns true if the specified `Global` is mutable."]
     pub fn BinaryenGlobalIsMutable(global: BinaryenGlobalRef) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Gets the initialization expression of the specified `Global`."]
     pub fn BinaryenGlobalGetInitExpr(global: BinaryenGlobalRef) -> BinaryenExpressionRef;
 }
 unsafe extern "C" {
+    #[doc = " Gets the name of the specified `Tag`."]
     pub fn BinaryenTagGetName(tag: BinaryenTagRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the parameters type of the specified `Tag`."]
     pub fn BinaryenTagGetParams(tag: BinaryenTagRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Gets the results type of the specified `Tag`."]
     pub fn BinaryenTagGetResults(tag: BinaryenTagRef) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Gets the external module name of the specified import."]
     pub fn BinaryenFunctionImportGetModule(
         import: BinaryenFunctionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -5464,6 +5988,7 @@ unsafe extern "C" {
     pub fn BinaryenTagImportGetModule(import: BinaryenTagRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the external base name of the specified import."]
     pub fn BinaryenFunctionImportGetBase(
         import: BinaryenFunctionRef,
     ) -> *const ::std::os::raw::c_char;
@@ -5478,15 +6003,19 @@ unsafe extern "C" {
     pub fn BinaryenTagImportGetBase(import: BinaryenTagRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the external kind of the specified export."]
     pub fn BinaryenExportGetKind(export_: BinaryenExportRef) -> BinaryenExternalKind;
 }
 unsafe extern "C" {
+    #[doc = " Gets the external name of the specified export."]
     pub fn BinaryenExportGetName(export_: BinaryenExportRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = " Gets the internal name of the specified export."]
     pub fn BinaryenExportGetValue(export_: BinaryenExportRef) -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
+    #[doc = "\n ========= Custom sections =========\n"]
     pub fn BinaryenAddCustomSection(
         module: BinaryenModuleRef,
         name: *const ::std::os::raw::c_char,
@@ -5494,6 +6023,7 @@ unsafe extern "C" {
         contentsSize: BinaryenIndex,
     );
 }
+#[doc = "\n ========= Effect analyzer =========\n"]
 pub type BinaryenSideEffects = u32;
 unsafe extern "C" {
     pub fn BinaryenSideEffectNone() -> BinaryenSideEffects;
@@ -5565,13 +6095,16 @@ pub struct RelooperBlock {
 }
 pub type RelooperBlockRef = *mut RelooperBlock;
 unsafe extern "C" {
+    #[doc = " Create a relooper instance"]
     pub fn RelooperCreate(module: BinaryenModuleRef) -> RelooperRef;
 }
 unsafe extern "C" {
+    #[doc = " Create a basic block that ends with nothing, or with some simple branching"]
     pub fn RelooperAddBlock(relooper: RelooperRef, code: BinaryenExpressionRef)
-    -> RelooperBlockRef;
+        -> RelooperBlockRef;
 }
 unsafe extern "C" {
+    #[doc = " Create a branch to another basic block\n The branch can have code on it, that is executed as the branch happens. this\n is useful for phis. otherwise, code can be NULL"]
     pub fn RelooperAddBranch(
         from: RelooperBlockRef,
         to: RelooperBlockRef,
@@ -5580,6 +6113,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Create a basic block that ends a switch on a condition"]
     pub fn RelooperAddBlockWithSwitch(
         relooper: RelooperRef,
         code: BinaryenExpressionRef,
@@ -5587,6 +6121,7 @@ unsafe extern "C" {
     ) -> RelooperBlockRef;
 }
 unsafe extern "C" {
+    #[doc = " Create a switch-style branch to another basic block. The block's switch table\n will have these indexes going to that target"]
     pub fn RelooperAddBranchForSwitch(
         from: RelooperBlockRef,
         to: RelooperBlockRef,
@@ -5596,6 +6131,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Generate structed wasm control flow from the CFG of blocks and branches that\n were created on this relooper instance. This returns the rendered output, and\n also disposes of the relooper and its blocks and branches, as they are no\n longer needed.\n @param labelHelper To render irreducible control flow, we may need a helper\n        variable to guide us to the right target label. This value should be\n        an index of an i32 local variable that is free for us to use."]
     pub fn RelooperRenderAndDispose(
         relooper: RelooperRef,
         entry: RelooperBlockRef,
@@ -5610,12 +6146,15 @@ pub struct CExpressionRunner {
 pub type ExpressionRunnerRef = *mut CExpressionRunner;
 pub type ExpressionRunnerFlags = u32;
 unsafe extern "C" {
+    #[doc = " By default, just evaluate the expression, i.e. all we want to know is whether\n it computes down to a concrete value, where it is not necessary to preserve\n side effects like those of a `local.tee`."]
     pub fn ExpressionRunnerFlagsDefault() -> ExpressionRunnerFlags;
 }
 unsafe extern "C" {
+    #[doc = " Be very careful to preserve any side effects. For example, if we are\n intending to replace the expression with a constant afterwards, even if we\n can technically evaluate down to a constant, we still cannot replace the\n expression if it also sets a local, which must be preserved in this scenario\n so subsequent code keeps functioning."]
     pub fn ExpressionRunnerFlagsPreserveSideeffects() -> ExpressionRunnerFlags;
 }
 unsafe extern "C" {
+    #[doc = " Creates an ExpressionRunner instance"]
     pub fn ExpressionRunnerCreate(
         module: BinaryenModuleRef,
         flags: ExpressionRunnerFlags,
@@ -5624,6 +6163,7 @@ unsafe extern "C" {
     ) -> ExpressionRunnerRef;
 }
 unsafe extern "C" {
+    #[doc = " Sets a known local value to use. Order matters if expressions have side\n effects. For example, if the expression also sets a local, this side effect\n will also happen (not affected by any flags). Returns `true` if the\n expression actually evaluates to a constant."]
     pub fn ExpressionRunnerSetLocalValue(
         runner: ExpressionRunnerRef,
         index: BinaryenIndex,
@@ -5631,6 +6171,7 @@ unsafe extern "C" {
     ) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets a known global value to use. Order matters if expressions have side\n effects. For example, if the expression also sets a local, this side effect\n will also happen (not affected by any flags). Returns `true` if the\n expression actually evaluates to a constant."]
     pub fn ExpressionRunnerSetGlobalValue(
         runner: ExpressionRunnerRef,
         name: *const ::std::os::raw::c_char,
@@ -5638,6 +6179,7 @@ unsafe extern "C" {
     ) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Runs the expression and returns the constant value expression it evaluates\n to, if any. Otherwise returns `NULL`. Also disposes the runner."]
     pub fn ExpressionRunnerRunAndDispose(
         runner: ExpressionRunnerRef,
         expr: BinaryenExpressionRef,
@@ -5651,28 +6193,36 @@ pub struct TypeBuilder {
 pub type TypeBuilderRef = *mut TypeBuilder;
 pub type TypeBuilderErrorReason = u32;
 unsafe extern "C" {
+    #[doc = " Indicates a cycle in the supertype relation."]
     pub fn TypeBuilderErrorReasonSelfSupertype() -> TypeBuilderErrorReason;
 }
 unsafe extern "C" {
+    #[doc = " Indicates that the declared supertype of a type is invalid."]
     pub fn TypeBuilderErrorReasonInvalidSupertype() -> TypeBuilderErrorReason;
 }
 unsafe extern "C" {
+    #[doc = " Indicates that the declared supertype is an invalid forward reference."]
     pub fn TypeBuilderErrorReasonForwardSupertypeReference() -> TypeBuilderErrorReason;
 }
 unsafe extern "C" {
+    #[doc = " Indicates that a child of a type is an invalid forward reference."]
     pub fn TypeBuilderErrorReasonForwardChildReference() -> TypeBuilderErrorReason;
 }
 pub type BinaryenBasicHeapType = u32;
 unsafe extern "C" {
+    #[doc = " Constructs a new type builder that allows for the construction of recursive\n types. Contains a table of `size` mutable heap types."]
     pub fn TypeBuilderCreate(size: BinaryenIndex) -> TypeBuilderRef;
 }
 unsafe extern "C" {
+    #[doc = " Grows the backing table of the type builder by `count` slots."]
     pub fn TypeBuilderGrow(builder: TypeBuilderRef, count: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Gets the size of the backing table of the type builder."]
     pub fn TypeBuilderGetSize(builder: TypeBuilderRef) -> BinaryenIndex;
 }
 unsafe extern "C" {
+    #[doc = " Sets the heap type at index `index` to a concrete signature type. Expects\n temporary tuple types if multiple parameter and/or result types include\n temporary types."]
     pub fn TypeBuilderSetSignatureType(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
@@ -5681,6 +6231,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Sets the heap type at index `index` to a concrete struct type."]
     pub fn TypeBuilderSetStructType(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
@@ -5691,6 +6242,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Sets the heap type at index `index` to a concrete array type."]
     pub fn TypeBuilderSetArrayType(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
@@ -5700,12 +6252,14 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Gets the temporary heap type to use at index `index`. Temporary heap types\n may only be used to construct temporary types using the type builder."]
     pub fn TypeBuilderGetTempHeapType(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
     ) -> BinaryenHeapType;
 }
 unsafe extern "C" {
+    #[doc = " Gets a temporary tuple type for use with and owned by the type builder."]
     pub fn TypeBuilderGetTempTupleType(
         builder: TypeBuilderRef,
         types: *mut BinaryenType,
@@ -5713,6 +6267,7 @@ unsafe extern "C" {
     ) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Gets a temporary reference type for use with and owned by the type builder."]
     pub fn TypeBuilderGetTempRefType(
         builder: TypeBuilderRef,
         heapType: BinaryenHeapType,
@@ -5720,6 +6275,7 @@ unsafe extern "C" {
     ) -> BinaryenType;
 }
 unsafe extern "C" {
+    #[doc = " Sets the type at `index` to be a subtype of the given super type."]
     pub fn TypeBuilderSetSubType(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
@@ -5727,9 +6283,11 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Sets the type at `index` to be open (i.e. non-final)."]
     pub fn TypeBuilderSetOpen(builder: TypeBuilderRef, index: BinaryenIndex);
 }
 unsafe extern "C" {
+    #[doc = " Creates a new recursion group in the range `index` inclusive to `index +\n length` exclusive. Recursion groups must not overlap."]
     pub fn TypeBuilderCreateRecGroup(
         builder: TypeBuilderRef,
         index: BinaryenIndex,
@@ -5737,6 +6295,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Builds the heap type hierarchy and disposes the builder. Returns `false` and\n populates `errorIndex` and `errorReason` on failure."]
     pub fn TypeBuilderBuildAndDispose(
         builder: TypeBuilderRef,
         heapTypes: *mut BinaryenHeapType,
@@ -5745,6 +6304,7 @@ unsafe extern "C" {
     ) -> bool;
 }
 unsafe extern "C" {
+    #[doc = " Sets the textual name of a compound `heapType`. Has no effect if the type\n already has a canonical name."]
     pub fn BinaryenModuleSetTypeName(
         module: BinaryenModuleRef,
         heapType: BinaryenHeapType,
@@ -5752,6 +6312,7 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Sets the field name of a struct `heapType` at index `index`."]
     pub fn BinaryenModuleSetFieldName(
         module: BinaryenModuleRef,
         heapType: BinaryenHeapType,
@@ -5760,8 +6321,10 @@ unsafe extern "C" {
     );
 }
 unsafe extern "C" {
+    #[doc = " Enable or disable coloring for the Wasm printer"]
     pub fn BinaryenSetColorsEnabled(enabled: bool);
 }
 unsafe extern "C" {
+    #[doc = " Query whether color is enable for the Wasm printer"]
     pub fn BinaryenAreColorsEnabled() -> bool;
 }

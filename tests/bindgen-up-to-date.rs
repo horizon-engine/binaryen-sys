@@ -12,6 +12,8 @@ fn test_bindings_up_to_date() {
         .header("binaryen/src/binaryen-c.h")
         // See https://github.com/rust-lang-nursery/rust-bindgen/issues/947
         .trust_clang_mangling(false)
+        .clang_arg("-fparse-all-comments")
+        .clang_arg("-fretain-comments-from-system-headers")
         .generate_comments(true)
         // https://github.com/rust-lang-nursery/rust-bindgen/issues/947#issuecomment-327100002
         .layout_tests(false)

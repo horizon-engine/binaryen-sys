@@ -10,6 +10,9 @@ description = "Bindings to the binaryen library"
 categories = ["external-ffi-bindings"]
 exclude = ["binaryen/test/*", "!binaryen/test/lit"]
 
+[lib]
+doctest = false
+
 [build-dependencies]
 cmake = "0.1"
 cc = "1"
